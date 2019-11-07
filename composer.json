@@ -20,14 +20,6 @@
       "test": [
         "@composer install",
         "vendor/bin/phpunit"
-      ],
-      "coverage": [
-        "@composer install",
-        "vendor/bin/phpunit --coverage-html tests/_reports"
-      ],
-      "cs": [
-        "@composer install",
-        "vendor/bin/phpcs src/ tests/ --standard=PSR2"
       ]
     },
     "autoload": {

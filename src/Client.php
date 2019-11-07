@@ -14,10 +14,8 @@ class Client
     /**
      * @var string
      */
-    const VERSION = 'v1';
-    const PLATAFORM = 'user';
-    const BASE_URI_TEST = 'http://app.motoboy.versaoemteste.com.br/api/' . VERSION . '/' . PLATAFORM . '/';
-    const BASE_URI      = 'http://app.motoboy.com.br/api/' . VERSION . '/' . PLATAFORM . '/';
+    const BASE_URI_TEST = 'http://app.motoboy.versaoemteste.com.br/api/v1/user/';
+    const BASE_URI      = 'http://app.motoboy.com.br/api//v1/user/';
 
     /**
      * @var string header used to identify application's requests
@@ -44,9 +42,8 @@ class Client
      * @param array|null $extras
      * @param boolean|false $test
      */
-    public function __construct($apiKey, array $extras = null, $test = false)
+    public function __construct(array $extras = null, $test = false)
     {
-        $this->apiKey = $apiKey;
 
         $options = ['base_uri' => $test ? self::BASE_URI_TEST : self::BASE_URI];
 
