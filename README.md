@@ -1,5 +1,29 @@
-# delivery-api-php
+<p align="center">
+  <a href="https://github.com/codificar/delivery-api-php">
+    <img alt="Codificar" src="https://codificar.com.br/wp-content/uploads/2019/04/xlogo-Codificar.png.pagespeed.ic.ln-Het4rqX.webp" width="300">
+  </a>
+</p>
 
+<h1 align="center">
+  <a href="https://github.com/codificar/delivery-api-php">
+    API Delivery PHP
+  </a>
+</h1>
+<p align="center">
+  Biblioteca desenvolvida pela Codificar .
+</p>
+
+<p align="center">
+  <a href="https://github.com/facebook/react-native/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="React Native is released under the MIT license." />
+  </a>
+  <a href="https://github.com/codificar/delivery-api-php/releases/">
+    <img src="https://img.shields.io/badge/vers%C3%A3o-0.0.1--beta-green" alt="Versão" />
+  </a>
+  <a href="https://packagist.org/packages/codificar/delivery-api-php">
+    <img src="https://img.shields.io/packagist/dt/codificar/delivery-api-php.svg" alt="Downloads" />
+  </a>
+</p>
 
 # Introdução
 
