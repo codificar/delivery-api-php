@@ -5,30 +5,37 @@ namespace Delivery\Exceptions;
 final class DeliveryException extends \Exception
 {
     /**
-     * @var string
+     * @var boolean
      */
-    private $type;
+    private $success;
 
     /**
      * @var string
      */
-    private $parameterName;
+    private $error;
 
     /**
-     * @var string
+     * @var array
      */
-    private $errorMessage;
+    private $errors;
 
     /**
-     * @param string $type
-     * @param string $parameterName
-     * @param string $errorMessage
+     * @var int
      */
-    public function __construct($type, $parameterName, $errorMessage)
+    private $error_code;
+
+    /**
+     * @param boolean $success
+     * @param int $error_code
+     * @param string $error
+     * @param array $errors
+     */
+    public function __construct($success, $error_code, $error = null, $errors = null)
     {
-        $this->type = $type;
-        $this->parameterName = $parameterName;
-        $this->errorMessage = $errorMessage;
+        $this->success = $success;
+        $this->error = $error;
+        $this->errors = $errors;
+        $this->error_code = $error_code;
 
         $exceptionMessage = $this->buildExceptionMessage();
 
@@ -41,26 +48,42 @@ final class DeliveryException extends \Exception
     private function buildExceptionMessage()
     {
         return sprintf(
-            'ERROR TYPE: %s. PARAMETER: %s. MESSAGE: %s',
-            $this->type,
-            $this->parameterName,
-            $this->errorMessage
+            $this->success,
+            $this->error,
+            $this->errors,
+            $this->error_code
         );
     }
 
     /**
-     * @return string
+     * @return boolean
      */
-    public function getType()
+    public function getSuccess()
     {
-        return $this->type;
+        return $this->success;
     }
 
     /**
      * @return string
      */
-    public function getParameterName()
+    public function getError()
     {
-        return $this->parameterName;
+        return $this->error;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    /**
+     * @return int
+     */
+    public function getErrorCode()
+    {
+        return $this->error_code;
     }
 }

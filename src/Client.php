@@ -14,8 +14,8 @@ class Client
     /**
      * @var string
      */
-    const BASE_URI_TEST = 'http://app.motoboy.versaoemteste.com.br/api/v1/user/';
-    const BASE_URI      = 'http://app.motoboy.com.br/api//v1/user/';
+    const BASE_URI_TEST = 'http://app.motoboy.versaoemteste.com.br/api/v1/';
+    const BASE_URI      = 'http://app.motoboy.com.br/api/v1/';
 
     /**
      * @var string header used to identify application's requests
@@ -26,11 +26,6 @@ class Client
      * @var \GuzzleHttp\Client
      */
     private $http;
-
-    /**
-     * @var string
-     */
-    private $apiKey;
 
     /**
      * @var \Delivery\Endpoints\Ride
@@ -78,10 +73,7 @@ class Client
             $response = $this->http->request(
                 $method,
                 $uri,
-                RequestHandler::bindApiKeyToQueryString(
-                    $options,
-                    $this->apiKey
-                )
+                $options
             );
 
             return ResponseHandler::success((string)$response->getBody());
@@ -92,14 +84,6 @@ class Client
         } catch (\Exception $exception) {
             throw $exception;
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getApiKey()
-    {
-        return $this->apiKey;
     }
 
     /**

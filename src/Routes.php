@@ -13,8 +13,12 @@ class Routes
     {
         $anonymous = new Anonymous();
 
+        $anonymous->create = static function () {
+            return 'user/request/create';
+        };
+
         $anonymous->estimate = static function () {
-            return 'estimate/estimate-request';
+            return 'estimate/estimate';
         };
 
         return $anonymous;

@@ -8,6 +8,21 @@ use Delivery\Endpoints\Endpoint;
 
 class Ride extends Endpoint
 {
+
+    /**
+     * @param array $payload
+     *
+     * @return \ArrayObject
+     */
+    public function create(array $payload)
+    {
+        return $this->client->request(
+            self::POST,
+            Routes::ride()->create(),
+            ['json' => $payload]
+        );
+    }
+
     /**
      * @param array $payload
      *
@@ -16,7 +31,7 @@ class Ride extends Endpoint
     public function estimate(array $payload)
     {
         return $this->client->request(
-            self::GET,
+            self::POST,
             Routes::ride()->estimate(),
             ['json' => $payload]
         );
