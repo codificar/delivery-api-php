@@ -155,4 +155,16 @@ final class ClientTest extends TestCase
         $this->assertEquals($error_code, $response->error_code);
     
     }
+
+    public function testRequestResendSuccessfulResponse()
+    {
+        $client = new Client(null, true);
+
+        $response = $client->ride()->resend(["request_id" => 2383]);
+        if(!$response->success) {
+            $this->assertEquals($response->errors, [""]);    
+        }
+        $this->assertEquals($response->success, true);
+        
+    }
 }
