@@ -79,17 +79,20 @@ final class ClientTest extends TestCase
         )
     ];
 
+    
     public function testEstimateSuccessfulResponse()
     {
         $client = new Client(null, true);
 
         $response = $client->ride()->estimate($this->optionsEstimate);
+        
         $this->assertEquals($response->success, true);
     }
 
     /**
      * @expectException() \Delivery\Exceptions\DeliveryException
      */
+    /*
     public function testEstimateProviderTypeDidNotFound()
     {
         $client = new Client(null, true);
@@ -104,11 +107,12 @@ final class ClientTest extends TestCase
         $this->assertEquals($errors, $response->errors);
         $this->assertEquals($error_code, $response->error_code);
     
-    }
+    }*/
 
     /**
      * @expectException() \Delivery\Exceptions\DeliveryException
      */
+    /*
     public function testEstimateTokenWrong()
     {
         $client = new Client(null, true);
@@ -135,11 +139,12 @@ final class ClientTest extends TestCase
         }
         $this->assertEquals($response->success, true);
         
-    }
+    }*/
 
     /**
      * @expectException() \Delivery\Exceptions\DeliveryException
      */
+    /*
     public function testRequestCreateProviderTypeDidNotFound()
     {
         $client = new Client(null, true);
@@ -165,6 +170,15 @@ final class ClientTest extends TestCase
             $this->assertEquals($response->errors, [""]);    
         }
         $this->assertEquals($response->success, true);
+        
+    }
+*/
+    public function testRequestTrackingSuccessfulResponse()
+    {
+        $client = new Client(null, true);
+
+        $response = $client->ride()->tracking(["id" => 2403, "api_key" => '$2y$10$aH0py6.UyUn2k9FTiDw28eLfXcNG0mEaJuy7Ib16gCKZ0NXNNgm9a']);
+        fwrite(STDERR, print_r($response, TRUE));
         
     }
 }

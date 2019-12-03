@@ -14,15 +14,19 @@ class Routes
         $anonymous = new Anonymous();
 
         $anonymous->create = static function () {
-            return 'user/request/create';
+            return Client::VERSION_API . 'user/request/create';
         };
 
         $anonymous->estimate = static function () {
-            return 'estimate/estimate';
+            return Client::VERSION_API . 'estimate/estimate';
         };
 
         $anonymous->resend = static function () {
-            return 'request/resend';
+            return Client::VERSION_API . 'request/resend';
+        };
+
+        $anonymous->tracking = static function ($id) {
+            return "requests/tracking/$id";
         };
 
         return $anonymous;
