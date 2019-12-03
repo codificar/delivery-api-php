@@ -36,4 +36,17 @@ class Ride extends Endpoint
             ['json' => $payload]
         );
     }
+    /**
+     * @param array $payload
+     *
+     * @return \ArrayObject
+     */
+    public function resend(array $payload)
+    {
+        return $this->client->resend(
+            self::POST,
+            Routes::ride()->estimate(),
+            ['json' => $payload]
+        );
+    }
 }

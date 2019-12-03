@@ -21,6 +21,10 @@ class Routes
             return 'estimate/estimate';
         };
 
+        $anonymous->resend = static function () {
+            return 'request/resend';
+        };
+
         return $anonymous;
     }
 }
