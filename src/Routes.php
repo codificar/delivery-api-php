@@ -25,8 +25,8 @@ class Routes
             return Client::VERSION_API . 'request/resend';
         };
 
-        $anonymous->tracking = static function ($id) {
-            return "requests/tracking/$id";
+        $anonymous->details = static function () {
+            return Client::VERSION_API . "user/request_details";
         };
 
         return $anonymous;

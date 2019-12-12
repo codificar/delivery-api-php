@@ -49,18 +49,18 @@ class Ride extends Endpoint
             ['json' => $payload]
         );
     }
-
+    
     /**
      * @param array $payload
      *
      * @return \ArrayObject
      */
-    public function tracking(array $payload)
+    public function details(array $payload)
     {
         return $this->client->request(
             self::GET,
-            Routes::ride()->tracking($payload['id']),
-            ['query' => $payload]
+            Routes::ride()->details(),
+            ['json' => $payload]
         );
     }
 }

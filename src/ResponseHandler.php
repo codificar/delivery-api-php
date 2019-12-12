@@ -67,8 +67,6 @@ class ResponseHandler
         $result = json_decode($json);
 
         if (json_last_error() != \JSON_ERROR_NONE) {
-            if(json_last_error_msg() == 'Syntax error')
-                return $json;
             throw new InvalidJsonException(json_last_error_msg());
         }
 
