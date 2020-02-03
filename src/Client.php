@@ -15,8 +15,8 @@ class Client
      * @var string
      */
     const VERSION_API = "api/v1/";
-    const BASE_URI_TEST = 'http://app.motoboy.versaoemteste.com.br/';
-    const BASE_URI      = 'http://app.motoboy.com.br/';
+    const BASE_URI_TEST = 'https://app.menufood.aplicativodeentrega.com.br/';
+    const BASE_URI      = 'https://app.menufood.aplicativodeentrega.com.br/';
 
     /**
      * @var string header used to identify application's requests
