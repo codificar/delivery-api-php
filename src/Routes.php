@@ -18,7 +18,7 @@ class Routes
         };
 
         $anonymous->estimate = static function () {
-            return Client::VERSION_API . 'int​/corp​/estimate_request';
+            return Client::VERSION_API . 'int/corp/estimate_request';
         };
 
         $anonymous->resend = static function () {
