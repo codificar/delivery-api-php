@@ -15,7 +15,6 @@ class Client
      * @var string
      */
     const VERSION_API = "api/v1/";
-    const BASE_URI_TEST = 'https://app.menufood.aplicativodeentrega.com.br/';
     const BASE_URI      = 'https://app.menufood.aplicativodeentrega.com.br/';
 
     /**
@@ -38,10 +37,10 @@ class Client
      * @param array|null $extras
      * @param boolean|false $test
      */
-    public function __construct(array $extras = null, $test = false)
+    public function __construct(array $extras = null)
     {
 
-        $options = ['base_uri' => $test ? self::BASE_URI_TEST : self::BASE_URI];
+        $options = ['base_uri' => self::BASE_URI];
 
         if (!is_null($extras)) {
             $options = array_merge($options, $extras);
