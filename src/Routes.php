@@ -25,8 +25,8 @@ class Routes
             return Client::VERSION_API . 'request/resend';
         };
 
-        $anonymous->details = static function () {
-            return Client::VERSION_API . "user/request_details";
+        $anonymous->details = static function ($id) {
+            return Client::VERSION_API . "int/corp/request/details/$id";
         };
 
         return $anonymous;
