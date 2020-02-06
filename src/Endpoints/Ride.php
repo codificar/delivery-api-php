@@ -59,7 +59,7 @@ class Ride extends Endpoint
     {
         return $this->client->request(
             self::GET,
-            Routes::ride()->details(),
+            Routes::ride()->details($payload['id']),
             ['json' => $payload]
         );
     }
