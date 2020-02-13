@@ -64,3 +64,4 @@ class Ride extends Endpoint
         );
     }
 }
+
