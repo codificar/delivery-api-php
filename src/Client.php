@@ -38,10 +38,12 @@ class Client
      * @param array|null $extras
      * @param boolean|false $test
      */
-    public function __construct(array $extras = null)
+    public function __construct($base_url = "", array $extras = null)
     {
+        if(empty($base_url) || !is_string($base_url) || !filter_var($base_url, FILTER_VALIDATE_URL))
+            $base_url = self::BASE_URI;
 
-        $options = ['base_uri' => self::BASE_URI];
+        $options = ['base_uri' => $base_url];
 
         if (!is_null($extras)) {
             $options = array_merge($options, $extras);
