@@ -40,7 +40,7 @@ class Routes
         $anonymous = new Anonymous();
 
         $anonymous->create = static function () {
-            return Client::VERSION_API . 'corp/new';
+            return 'corp/new';
         };
         return $anonymous;
     }
