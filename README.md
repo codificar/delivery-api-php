@@ -35,10 +35,14 @@ Você pode acessar a documentação oficial da API acessando esse [link](http://
 
 - [Instalação](#instalação)
 - [Configuração](#configuração)
-- [Requisição](#requisição)
-  - [Criando uma nova requisiçao buscando um para próximo](#criando-uma-nova-requisiçao-para-um-provider-próximo)
-- [Estimar](#estimar)
+- [Requisição de corrida](#requisição-de-corrida)
+  - [Criando uma nova requisiçao buscando um provider próximo](#criando-uma-nova-requisiçao-para-um-provider-próximo)
   - [Gerar estimativa da corrida](#gerar-estimativa-da-corrida)
+  - [Detalhes da corrida](#detalhes-da-corrida)
+  - [Reenviar uma corrida](#reenviar-uma-corrida)
+- [Requisição de store](#requisição-de-store)
+  - [Criando uma nova store](#criando-uma-nova-store)
+
 ## Instalação
 
 Instale a biblioteca utilizando o comando
@@ -72,88 +76,161 @@ $delivery = new Delivery\Client(
 
 E então, você pode poderá utilizar o cliente para fazer requisições ao Delivery da codificar, como nos exemplos abaixo.
 
-## Requisição
+## Requisição de corrida
 
-Nesta seção será explicado como realizar requisições no Delivery com essa biblioteca.
+Nesta seção será explicado como realizar requisições de corridas no Delivery com essa biblioteca.
 
 ### Criando uma nova requisiçao para um provider próximo
 
 ```php
 <?php
  $options = [
-        'user_id' => <USER_ID:INT>,
-        'token' => <TOKEN:STRNIG>,
+        'institution_id' => <USER_ID:INT>,
+        'token' => <TOKEN:STRING>,
         'provider_type' => <PROVIDER_TYPE:INT>,
+        'return_to_start' => <BOOLEAN>,
         'points' => array(
             array(
-                'title' => 'A',
-                'action_type' => 1,
-                'action' => 'Deve entregar documento 213123',
+                'title' => <POINT_A:STRING>,
+                'action_type' => <ACTION_TYPE:INT>,
+                'action' => <ACTION:STRING>,
+                'collect_value' => <PAYMENT_TOTAL:FLOAT>,
+                'change' => <PAYMENT_CHANGE:FLOAT>,
+                'form_of_receipt' => <FORM_OF_RECEIPT:INT('Dinheiro'=1, 'Maquina'=4, 'None'=0)>,
+                'collect_pictures' => <BOOLEAN>,
+                'collect_signature' => <BOOLEAN>,
                 'geometry' => array(
                     'location' => array(
-                        'lat' => -19.9224004,
-                        'lng' => -43.94055579999997
+                        'lat' => <LATITUDE:FLOAT>,
+                        'lng' => <LONGITUTDE:FLOAT>
                     )
                 ),
-            'address' => 'Rua dos Goitacazes, 374 - Centro, Belo Horizonte - MG, Brasil'
+            'address' => <FULL_ADDRESS:STRING>
             ),
             array(
-                'title' => 'B',
-                'action_type' => 1,
-                'action' => 'Deve entregar documento 213123',
+                'title' => <POINT_A:STRING>,
+                'action_type' => <ACTION_TYPE:INT>,
+                'action' => <ACTION:STRING>,
+                'collect_value' => <PAYMENT_TOTAL:FLOAT>,
+                'change' => <PAYMENT_CHANGE:FLOAT>,
+                'form_of_receipt' => <FORM_OF_RECEIPT:INT('Dinheiro'=1, 'Maquina'=4, 'None'=0)>,
+                'collect_pictures' => <BOOLEAN>,
+                'collect_signature' => <BOOLEAN>,
                 'geometry' => array(
                     'location' => array(
-                        'lat' => -19.9191953,
-                        'lng' => -43.917991400000005
+                        'lat' => <LATITUDE:FLOAT>,
+                        'lng' => <LONGITUTDE:FLOAT>
                     )
                 ),
-                'address' => 'Av. dos Andradas, 500 - Santa Tereza, Belo Horizonte - MG, Brasil'
+            'address' => <FULL_ADDRESS:STRING>
             ),
         ),
     ];
-
+$delivery = new Delivery\Client();
 $request = $delivery->ride()->create($options);
 ```
 
-## Estimar
+### Gerar estimativa da corrida
 
 Nesta seção será explicado como realizar requisições para estimativas no Delivery com essa biblioteca.
-
-### Gerar estimativa da corrida
 
 ```php
 <?php
 $options = [
-        'user_id' => <USER_ID:INT>,
-        'token' => <TOKEN:STRNIG>,
+        'institution_id' => <USER_ID:INT>,
+        'token' => <TOKEN:STRING>,
         'provider_type' => <PROVIDER_TYPE:INT>,
+        'return_to_start' => <BOOLEAN>,
         'points' => array(
             array(
-                'title' => 'A',
-                'action_type' => 1,
-                'action' => 'Deve entregar documento 213123',
+                'title' => <POINT_A:STRING>,
+                'action_type' => <ACTION_TYPE:INT>,
+                'action' => <ACTION:STRING>,
                 'geometry' => array(
                     'location' => array(
-                        'lat' => -19.9224004,
-                        'lng' => -43.94055579999997
+                        'lat' => <LATITUDE:FLOAT>,
+                        'lng' => <LONGITUTDE:FLOAT>
                     )
                 ),
-            'address' => 'Rua dos Goitacazes, 374 - Centro, Belo Horizonte - MG, Brasil'
+            'address' => <FULL_ADDRESS:STRING>
             ),
             array(
-                'title' => 'B',
-                'action_type' => 1,
-                'action' => 'Deve entregar documento 213123',
+                'title' => <POINT_B:STRING>,
+                'action_type' => <ACTION_TYPE:INT>,
+                'action' => <ACTION:STRING>,
                 'geometry' => array(
                     'location' => array(
-                        'lat' => -19.9191953,
-                        'lng' => -43.917991400000005
+                        'lat' => <LATITUDE:FLOAT>,
+                        'lng' => <LONGITUTDE:FLOAT>
                     )
                 ),
-                'address' => 'Av. dos Andradas, 500 - Santa Tereza, Belo Horizonte - MG, Brasil'
+            'address' => <FULL_ADDRESS:STRING>
             ),
         )
     ];
+
+$delivery = new Delivery\Client();
 $estimate = $delivery->ride()->estimate($options);
 ```
+### Detalhes da corrida
 
+Nesta seção será explicado como realizar requisições para obter os detalhes da corrida no Delivery com essa biblioteca.
+
+```php
+<?php
+$options = [
+        'institution_id' => <USER_ID:INT>,
+        'token' => <TOKEN:STRING>,
+        'id' => <ID_CORRIDA:INT>,
+    ];
+
+$delivery = new Delivery\Client();
+$estimate = $delivery->ride()->details($options);
+```
+
+### Reenviar uma corrida
+
+Nesta seção será explicado como realizar requisições para reenviar uma corrida no Delivery com essa biblioteca.
+
+```php
+<?php
+
+$delivery = new Delivery\Client();
+$estimate = $delivery->ride()->resend(['request_id' => <ID>]);
+```
+
+
+## Requisição de store
+
+Nesta seção será explicado como realizar requisições para criar uma nova store com essa biblioteca.
+
+### Criando uma nova store
+
+```php
+<?php
+ $options = [
+        "person" => <TYPE_PERSON:INT('Física'=1, 'Jurídica'=2)>,
+        "user" => [
+            "name" => <NAME:STRING>,
+            "document" => <NUMBER_DOCUMENT:STRING>,
+            "email" => <EMAIL:STRING>,
+            "phone" => <FULL_PHONE:STRING>,
+            "password" => <PASSWORD:STRING>,
+            "acknowledgement" => <ACKNOWLEDGEMENT:STRING>,
+            "confirm_password" => <CONFIRM_PASSWORD:STRING>
+        ],
+        "address" => [
+            "street" => <STREET_STORE:STRING>,
+            "zip_code" => <ZIP_CODE:STRING>,
+            "state" => <STATE:STRING>,
+            "district" => <DISTRICT:STRING>,
+            "city" => <CITY:STRING>,
+            "country" => <COUNTRY:STRING>,
+            "complement" => <COMPLEMENT:STRING>,
+            "number" => <NUMBER:STRING>
+        ]
+    ];
+    
+$delivery = new Delivery\Client();
+$request = $delivery->store()->create($options);
+```
