@@ -31,4 +31,17 @@ class Routes
 
         return $anonymous;
     }
+
+      /**
+     * @return \PagarMe\Anonymous
+     */
+    public static function store()
+    {
+        $anonymous = new Anonymous();
+
+        $anonymous->create = static function () {
+            return Client::VERSION_API . 'corp/new';
+        };
+        return $anonymous;
+    }
 }

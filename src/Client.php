@@ -4,6 +4,7 @@ namespace Delivery;
 
 use Delivery\RequestHandler;
 use Delivery\Endpoints\Ride;
+use Delivery\Endpoints\Store;
 use PHPUnit\Framework\TestCase;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\ClientException as ClientException;
@@ -34,6 +35,11 @@ class Client
     private $ride;
 
     /**
+     * @var \Delivery\Endpoints\Store
+     */
+    private $store;
+
+    /**
      * @param string $apiKey
      * @param array|null $extras
      * @param boolean|false $test
@@ -58,6 +64,7 @@ class Client
         $this->http = new HttpClient($options);
 
         $this->ride = new Ride($this);
+        $this->store = new Store($this);
     }
 
     /**
@@ -127,5 +134,13 @@ class Client
     public function ride()
     {
         return $this->ride;
+    }
+    
+    /**
+     * @return \Delivery\Endpoints\Ride
+     */
+    public function store()
+    {
+        return $this->store;
     }
 }
