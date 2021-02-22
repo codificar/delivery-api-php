@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/codificar/delivery-api-php">
-    <img alt="Codificar" src="https://codificar.com.br/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2019/04/logo-Codificar.png.webp" width="300">
+    <img alt="Codificar" src="https://codificar.com.br/wp-content/uploads/2019/04/logo-cod.png.webp" width="300">
   </a>
 </p>
 
