@@ -87,15 +87,16 @@ Nesta seção será explicado como realizar requisições de corridas no Deliver
  $options = [
         'institution_id' => <USER_ID:INT>,
         'token' => <TOKEN:STRING>,
-        'provider_type' => <PROVIDER_TYPE:INT>,
+        'type' => <PROVIDER_TYPE:INT>,
+        'payment_mode' => <PAYMENT_MODE:INT>,
         'return_to_start' => <BOOLEAN>,
         'points' => array(
             array(
                 'title' => <POINT_A:STRING>,
                 'action_type' => <ACTION_TYPE:INT>,
                 'action' => <ACTION:STRING>,
-                'collect_value' => <PAYMENT_TOTAL:FLOAT>,
-                'change' => <PAYMENT_CHANGE:FLOAT>,
+                'collect_value' => <COLLECT_VALUE:FLOAT>,
+                'change' => <CHANGE:FLOAT>,
                 'form_of_receipt' => <FORM_OF_RECEIPT:INT('Dinheiro'=1, 'Maquina'=4, 'None'=0)>,
                 'collect_pictures' => <BOOLEAN>,
                 'collect_signature' => <BOOLEAN>,
@@ -108,14 +109,15 @@ Nesta seção será explicado como realizar requisições de corridas no Deliver
             'address' => <FULL_ADDRESS:STRING>
             ),
             array(
-                'title' => <POINT_A:STRING>,
+                'title' => <POINT_B:STRING>,
                 'action_type' => <ACTION_TYPE:INT>,
                 'action' => <ACTION:STRING>,
-                'collect_value' => <PAYMENT_TOTAL:FLOAT>,
-                'change' => <PAYMENT_CHANGE:FLOAT>,
+                'collect_value' => <COLLECT_VALUE:FLOAT>,
+                'change' => <CHANGE:FLOAT>,
                 'form_of_receipt' => <FORM_OF_RECEIPT:INT('Dinheiro'=1, 'Maquina'=4, 'None'=0)>,
                 'collect_pictures' => <BOOLEAN>,
                 'collect_signature' => <BOOLEAN>,
+                'order_id' => <ORDER_ID>,
                 'geometry' => array(
                     'location' => array(
                         'lat' => <LATITUDE:FLOAT>,
@@ -140,12 +142,18 @@ $options = [
         'institution_id' => <USER_ID:INT>,
         'token' => <TOKEN:STRING>,
         'provider_type' => <PROVIDER_TYPE:INT>,
+        'payment_mode' => <PAYMENT_MODE:INT>,
         'return_to_start' => <BOOLEAN>,
         'points' => array(
             array(
                 'title' => <POINT_A:STRING>,
                 'action_type' => <ACTION_TYPE:INT>,
                 'action' => <ACTION:STRING>,
+                'collect_value' => <COLLECT_VALUE:FLOAT>,
+                'change' => <CHANGE:FLOAT>,
+			          'form_of_receipt' => <FORM_OF_RECEIPT:STRING>('Dinheiro'=1, 'Maquina'=4, 'None'=0)>,
+			          'collect_pictures' => <BOOLEAN|DEFAULT: false>,
+			          'collect_signature' => <BOOLEAN|DEFAULT: false>,
                 'geometry' => array(
                     'location' => array(
                         'lat' => <LATITUDE:FLOAT>,
@@ -158,6 +166,11 @@ $options = [
                 'title' => <POINT_B:STRING>,
                 'action_type' => <ACTION_TYPE:INT>,
                 'action' => <ACTION:STRING>,
+                'collect_value': <COLLECT_VALUE:INT>,
+			          'change': <NULL>,
+			          'form_of_receipt': <FORM_OF_RECEIPT:STRING>('Dinheiro'=1, 'Maquina'=4, 'None'=0)>,
+			          'collect_pictures': <BOOLEAN|DEFAULT: false>,
+			          'collect_signature': <BOOLEAN|DEFAULT: false>,
                 'geometry' => array(
                     'location' => array(
                         'lat' => <LATITUDE:FLOAT>,
@@ -206,18 +219,21 @@ Nesta seção será explicado como realizar requisições para criar uma nova st
 
 ### Criando uma nova store
 
+#### Do tipo Pessoa Física
+
 ```php
 <?php
  $options = [
         "person" => <TYPE_PERSON:INT('Física'=1, 'Jurídica'=2)>,
+        "show_key_if_exists" => <BOOLEAN|DEFAULT: false>,
         "user" => [
             "name" => <NAME:STRING>,
             "document" => <NUMBER_DOCUMENT:STRING>,
             "email" => <EMAIL:STRING>,
             "phone" => <FULL_PHONE:STRING>,
             "password" => <PASSWORD:STRING>,
+            "passwordRepeat" => <PASSWORD_REPEAT:STRING>,
             "acknowledgement" => <ACKNOWLEDGEMENT:STRING>,
-            "confirm_password" => <CONFIRM_PASSWORD:STRING>
         ],
         "address" => [
             "street" => <STREET_STORE:STRING>,
@@ -230,7 +246,50 @@ Nesta seção será explicado como realizar requisições para criar uma nova st
             "number" => <NUMBER:STRING>
         ]
     ];
-    
+?>
+```
+
+#### Do tipo Pessoa Jurídica
+
+``` php
+<?php
+ $options = [
+        "person" => <TYPE_PERSON:INT('Física'=1, 'Jurídica'=2)>,
+        "show_key_if_exists" => <BOOLEAN|DEFAULT: false>,
+        "institution" => [
+            "name" => <NAME:STRING>,
+            "social_reason" => <SOCIAL_REASON:STRING>,
+            "document" => <NUMBER_DOCUMENT:STRING>,
+            "responsible" => <RESPONSIBLE:STRING>,
+            "responsible_position" => <RESPONSIBLE_POSITION:STRING>,
+            "email" => <EMAIL:STRING>,
+            "phone" => <FULL_PHONE:STRING>,
+            "acknowledgement" => <ACKNOWLEDGEMENT:STRING>,
+        ],
+        "admin" => [
+            "username" => <USERNAME:STRING>,
+            "password" => <PASSWORD:STRING>,
+            "passwordRepeat" => <PASSWORD_REPEAT:STRING>,
+
+        ],
+        "address" => [
+            "street" => <STREET_STORE:STRING>,
+            "zip_code" => <ZIP_CODE:STRING>,
+            "state" => <STATE:STRING>,
+            "district" => <DISTRICT:STRING>,
+            "city" => <CITY:STRING>,
+            "country" => <COUNTRY:STRING>,
+            "complement" => <COMPLEMENT:STRING>,
+            "number" => <NUMBER:STRING>
+        ]
+    ];
+?>
+```
+
+ Agora envie a solicitação com a `$options` desejada.
+``` php
+<?php
 $delivery = new Delivery\Client();
 $request = $delivery->store()->create($options);
+?>
 ```
