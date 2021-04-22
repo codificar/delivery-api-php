@@ -87,7 +87,7 @@ Nesta seção será explicado como realizar requisições de corridas no Deliver
  $options = [
         'institution_id' => <USER_ID:INT>,
         'token' => <TOKEN:STRING>,
-        'type' => <PROVIDER_TYPE:INT>,
+        'provider_type' => <PROVIDER_TYPE:INT>,
         'payment_mode' => <PAYMENT_MODE:INT>,
         'return_to_start' => <BOOLEAN>,
         'points' => array(
