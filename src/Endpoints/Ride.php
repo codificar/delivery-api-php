@@ -63,5 +63,19 @@ class Ride extends Endpoint
             ['json' => $payload]
         );
     }
+    
+    /**
+     * @param array $payload
+     *
+     * @return \ArrayObject
+     */
+    public function typesService(array $payload)
+    {
+        return $this->client->request(
+            self::GET,
+            Routes::ride()->typesService(),
+            ['json' => $payload]
+        );
+    }
 }
 

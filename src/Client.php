@@ -46,14 +46,21 @@ class Client
      */
     public function __construct($base_url = "", array $extras = null)
     {
+        $this->setBaseUrl($base_url, $extras);
+
+        $this->ride = new Ride($this);
+        $this->store = new Store($this);
+    }
+
+    private function setBaseUrl($base_url = "", array $extras = null)
+    {
         if(empty($base_url) || !is_string($base_url) || !filter_var($base_url, FILTER_VALIDATE_URL))
             $base_url = self::BASE_URI;
 
         $options = ['base_uri' => $base_url];
 
-        if (!is_null($extras)) {
+        if (!is_null($extras))
             $options = array_merge($options, $extras);
-        }
 
         $userAgent = isset($options['headers']['User-Agent']) ?
             $options['headers']['User-Agent'] :
@@ -62,9 +69,6 @@ class Client
         $options['headers'] = $this->addUserAgentHeaders($userAgent);
 
         $this->http = new HttpClient($options);
-
-        $this->ride = new Ride($this);
-        $this->store = new Store($this);
     }
 
     /**

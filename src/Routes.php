@@ -29,6 +29,10 @@ class Routes
             return Client::VERSION_API . "int/corp/request/details/$id";
         };
 
+        $anonymous->typesService = static function () {
+            return Client::VERSION_API . "application/types";
+        };
+
         return $anonymous;
     }
 

@@ -74,10 +74,24 @@ class Ride {
             // error no data response
         }
     }
+    
     public function resendRide()
     {
         $client = new Client(Ride::URL);
         $response = $client->ride()->resend(["request_id" => 1033]);
+
+        if ($response->success) { 
+            // response success
+        } else {
+            // response error
+        }
+    }
+
+    public function getTypeService()
+    {
+        $domain = "";
+        $client = new Client($domain);
+        $response = $client->ride()->typesService(["platform" => "codificar"]);
 
         if ($response->success) { 
             // response success
