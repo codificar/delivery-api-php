@@ -36,7 +36,8 @@ Você pode acessar a documentação oficial da API acessando esse [link](http://
 - [Instalação](#instalação)
 - [Configuração](#configuração)
 - [Requisição de corrida](#requisição-de-corrida)
-  - [Criando uma nova requisiçao buscando um provider próximo](#criando-uma-nova-requisiçao-para-um-provider-próximo)
+  - [Criando uma nova requisição buscando um provider próximo](#criando-uma-nova-requisiçao-para-um-provider-próximo)
+  - [Cancelando uma requisição](#cancelando-uma-requisicao)
   - [Gerar estimativa da corrida](#gerar-estimativa-da-corrida)
   - [Detalhes da corrida](#detalhes-da-corrida)
   - [Reenviar uma corrida](#reenviar-uma-corrida)
@@ -80,7 +81,7 @@ E então, você pode poderá utilizar o cliente para fazer requisições ao Deli
 
 Nesta seção será explicado como realizar requisições de corridas no Delivery com essa biblioteca.
 
-### Criando uma nova requisiçao para um provider próximo
+### Criando uma nova requisição para um provider próximo
 
 ```php
 <?php
@@ -130,6 +131,20 @@ Nesta seção será explicado como realizar requisições de corridas no Deliver
     ];
 $delivery = new Delivery\Client();
 $request = $delivery->ride()->create($options);
+```
+
+### Cancelando uma requisição
+
+```php
+<?php
+ $options = [
+        'institution_id' => <USER_ID:INT>,
+        'token' => <TOKEN:STRING>,
+        'request_id' => <REQUEST_ID:INT>,
+        'reason' => <REASON:STRING>
+    ];
+$delivery = new Delivery\Client();
+$request = $delivery->ride()->cancel($options);
 ```
 
 ### Gerar estimativa da corrida

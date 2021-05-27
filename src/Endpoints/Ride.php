@@ -22,6 +22,20 @@ class Ride extends Endpoint
             ['json' => $payload]
         );
     }
+    
+    /**
+     * @param array $payload
+     *
+     * @return \ArrayObject
+     */
+    public function cancel(array $payload)
+    {
+        return $this->client->request(
+            self::POST,
+            Routes::ride()->cancel(),
+            ['json' => $payload]
+        );
+    }
 
     /**
      * @param array $payload

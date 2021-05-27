@@ -16,6 +16,10 @@ class Routes
         $anonymous->create = static function () {
             return Client::VERSION_API . 'int/corp/request/create';
         };
+        
+        $anonymous->cancel = static function () {
+            return Client::VERSION_API . 'int/corp/request/cancel';
+        };
 
         $anonymous->estimate = static function () {
             return Client::VERSION_API . 'int/corp/estimate_request';
