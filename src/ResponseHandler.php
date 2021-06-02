@@ -61,8 +61,9 @@ class ResponseHandler
 
         return new DeliveryException(
             $jsonError->success,
-            $jsonError->error || 404,
-            $jsonError->api_message || $jsonError->error
+            isset($jsonError->error) && !empty($jsonError->error) ? $jsonError->error : 404,
+            isset($jsonError->api_message) && !empty($jsonError->api_message) ? $jsonError->api_message : $jsonError->error,
+            null
         );
 
         
