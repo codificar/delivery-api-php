@@ -51,11 +51,21 @@ class ResponseHandler
             return $guzzleException;
         }
 
+        if(isset($jsonError->errors) && !empty($jsonError->errors) ) {
+            return new DeliveryException(
+                $jsonError->errors[0]->type,
+                $jsonError->errors[0]->parameter_name,
+                $jsonError->errors[0]->message
+            );
+        }
+
         return new DeliveryException(
-            $jsonError->errors[0]->type,
-            $jsonError->errors[0]->parameter_name,
-            $jsonError->errors[0]->message
+            $jsonError->success,
+            $jsonError->error || 404,
+            $jsonError->api_message || $jsonError->error
         );
+
+        
     }
 
     /**
