@@ -48,10 +48,7 @@ final class DeliveryException extends \Exception
     private function buildExceptionMessage()
     {
         return sprintf(
-            $this->success,
-            $this->error,
-            $this->errors,
-            $this->error_code
+            $this->error
         );
     }
 
