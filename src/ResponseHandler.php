@@ -53,10 +53,11 @@ class ResponseHandler
 
         if(isset($jsonError->errors) && !empty($jsonError->errors) ) {
             return new DeliveryException(
-                $jsonError->errors[0]->type,
-                $jsonError->errors[0]->parameter_name,
-                $jsonError->errors[0]->message
-            );
+                $jsonError->success,
+                $jsonError->error_code,
+                isset($jsonError->error) && !empty($jsonError->error) ? $jsonError->error : null,
+                $jsonError->errors
+                );
         }
 
         return new DeliveryException(
